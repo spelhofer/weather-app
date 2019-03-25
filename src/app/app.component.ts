@@ -1,30 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import cities from 'cities.json';
-
+// import cities from 'cities.json';
+import * as cities from 'cities.json';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
     private appId: string;
     private appCode: string;
     public geocoder: any;
     public weather: any;
-    public city: string;
+    public city: any;
 
     public constructor(private http: HttpClient) {
         this.appId = "OnWpa1idVKTh0Q24NHJG";
         this.appCode = "xrF7M2a5nJ23NY-Yvq3uxQ";
         this.weather = [];
+        this.city = '';
     }
 
     public getCity(){
-        this.city = document.getElementsByClassName('getCityName')[0].value;
-        this.geocoder = cities.filter(el => el.name === this.city);
+        // let inputFields = (<HTMLInputElement>event.target).value
+        // this.city = document.getElementsByClassName('getCityName')[0].value;
+        this.geocoder = cities['default'].filter(el => el.name === 'Lviv');
+        console.log()
         this.getWeather();
     }
 
